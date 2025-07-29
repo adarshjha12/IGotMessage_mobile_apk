@@ -1,28 +1,45 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { HourglassMediumIcon, HouseIcon } from 'phosphor-react-native';
+import React from 'react';
+import './global.css';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  StatusBar,
+  Platform,
+  TouchableOpacity,
+  SafeAreaView,
+  Touchable,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import LinearGradient from 'react-native-linear-gradient';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+// Wrap LinearGradient with NativeWind support
 
+export default function FullScreenPage() {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
+    <View className="flex-1">
+      <LinearGradient
+        className="flex-1  justify-center items-center"
+        colors={['#025bf4', '#0802b8']}
+      >
+        <StatusBar translucent backgroundColor={'transparent'}></StatusBar>
+        <View className="bg-red-500 ">
+          <Text style={{fontFamily: 'Montez-Regular', fontSize: 50, color: '#fff', fontWeight: '600'}} className="text-white text-3xl font-extrabold ">
+            hello world
+          </Text>
+          <Text style={{fontFamily: 'PlaywriteHU-Light', fontSize: 50, color: '#fff', fontWeight: '500'}} className="text-white  text-3xl font-extrabold ">
+            IGotMessage App
+          </Text>
+        </View>
+      </LinearGradient>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+const style = StyleSheet.create({
+  color: {
+    color: '#000',
   },
 });
-
-export default App;

@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Montez-Regular.ttf",
+      "sha1": "3338dbef80578efec573e5d0026ba6e289545141"
+    },
+    {
+      "path": "assets/fonts/PlaywriteHU-Light.ttf",
+      "sha1": "e9434e0bd1076683b1d3bd20ced0b5611f1bd522"
+    }
+  ]
+}
