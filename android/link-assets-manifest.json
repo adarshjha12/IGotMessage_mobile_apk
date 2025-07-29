@@ -2,6 +2,18 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Audiowide-Regular.ttf",
+      "sha1": "651503b7a0a89f49f78f14d04c62f811853573cd"
+    },
+    {
+      "path": "assets/fonts/DancingScript-Bold.ttf",
+      "sha1": "40fe07b1708cf0cde98d01f7b196739ea3dab985"
+    },
+    {
+      "path": "assets/fonts/Exo2-ExtraBold.ttf",
+      "sha1": "095b02e791c348cc726ca4d471d1af772b5605d2"
+    },
+    {
       "path": "assets/fonts/Montez-Regular.ttf",
       "sha1": "3338dbef80578efec573e5d0026ba6e289545141"
     },

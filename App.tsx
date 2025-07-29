@@ -2,6 +2,10 @@ import { HourglassMediumIcon, HouseIcon } from 'phosphor-react-native';
 import React from 'react';
 import './global.css';
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+
 import {
   View,
   Text,
@@ -14,27 +18,22 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import LoginScreen from './src/screens/LoginScreen';
 
-// Wrap LinearGradient with NativeWind support
+const Stack = createNativeStackNavigator();
 
 export default function FullScreenPage() {
   return (
-    <View className="flex-1">
-      <LinearGradient
-        className="flex-1  justify-center items-center"
-        colors={['#025bf4', '#0802b8']}
-      >
-        <StatusBar translucent backgroundColor={'transparent'}></StatusBar>
-        <View className="bg-red-500 ">
-          <Text style={{fontFamily: 'Montez-Regular', fontSize: 50, color: '#fff', fontWeight: '600'}} className="text-white text-3xl font-extrabold ">
-            hello world
-          </Text>
-          <Text style={{fontFamily: 'PlaywriteHU-Light', fontSize: 50, color: '#fff', fontWeight: '500'}} className="text-white  text-3xl font-extrabold ">
-            IGotMessage App
-          </Text>
-        </View>
-      </LinearGradient>
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{ headerShown: false }}
+          initialRouteName="Login"
+        >
+          <Stack.Screen name="Login" component={LoginScreen} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
 
