@@ -1,4 +1,4 @@
-import { HourglassMediumIcon, HouseIcon } from 'phosphor-react-native';
+import 'react-native-reanimated';
 import React from 'react';
 import './global.css';
 
@@ -16,24 +16,41 @@ import {
   SafeAreaView,
   Touchable,
 } from 'react-native';
+import ThemeWrapper from './src/components/theme/ThemeWrapper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import LoginScreen from './src/screens/LoginScreen';
+import { Provider } from 'react-redux';
+import { store } from './src/store/store';
+import DashScreen from './src/screens/EmailInputScreen';
+import EmailInputScreen from './src/screens/EmailInputScreen';
+import OtpFieldsScreen from './src/screens/OtpFieldsScreen';
 
 const Stack = createNativeStackNavigator();
 
 export default function FullScreenPage() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Login"
-        >
-          <Stack.Screen name="Login" component={LoginScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <ThemeWrapper>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <NavigationContainer>
+            <Stack.Navigator
+              screenOptions={{ headerShown: false }}
+              initialRouteName="Login"
+            >
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="OtpField" component={OtpFieldsScreen} />
+              <Stack.Screen name="EmailInputScreen" component={EmailInputScreen} options={{animation: 'none'}}/>
+              <Stack.Screen
+                name="DashScreen"
+                component={DashScreen}
+                options={{ headerShown: true, animation: 'none', title: 'Dashboard' }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </ThemeWrapper>
+    </Provider>
   );
 }
 
