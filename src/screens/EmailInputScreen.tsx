@@ -102,7 +102,7 @@ export default function EmailInputScreen() {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
-          className="w-full px-4 text-xl py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          className="w-full px-4 text-xl py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 font-exo2Medium text-black dark:text-white"
         />
         <View className="justify-start flex-row items-end">
           <Text
