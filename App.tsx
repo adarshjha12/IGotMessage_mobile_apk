@@ -36,15 +36,24 @@ export default function FullScreenPage() {
           <NavigationContainer>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
-              initialRouteName="Login"
+              initialRouteName="LoginScreen"
             >
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="OtpField" component={OtpFieldsScreen} />
-              <Stack.Screen name="EmailInputScreen" component={EmailInputScreen} options={{animation: 'none'}}/>
+              <Stack.Screen name="LoginScreen" component={LoginScreen} />
+              <Stack.Screen
+                name="EmailInputScreen"
+                component={EmailInputScreen}
+                options={{ animation: 'none' }}
+              />
+              <Stack.Screen name="OtpFieldsScreen" component={OtpFieldsScreen} options={{ animation: 'none' }}/>
+
               <Stack.Screen
                 name="DashScreen"
                 component={DashScreen}
-                options={{ headerShown: true, animation: 'none', title: 'Dashboard' }}
+                options={{
+                  headerShown: true,
+                  animation: 'none',
+                  title: 'Dashboard',
+                }}
               />
             </Stack.Navigator>
           </NavigationContainer>

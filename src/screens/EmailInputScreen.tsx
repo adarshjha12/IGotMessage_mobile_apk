@@ -1,38 +1,61 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Pressable, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useColorScheme } from 'nativewind';
 import {
   ArrowRightIcon,
   CaretLeftIcon,
+  CheckIcon,
+  KeyIcon,
   LogIcon,
   UserCircleIcon,
 } from 'phosphor-react-native';
 import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types/navigation';
 import Ripple from 'react-native-material-ripple';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
+import validator from 'validator';
+
+type NavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'EmailInputScreen'
+>;
 
 export default function EmailInputScreen() {
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const { colorScheme } = useColorScheme();
-
-  type NavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    'EmailInputScreen'
-  >;
+  const isValidEmail = validator.isEmail(email);
 
   const navigation = useNavigation<NavigationProp>();
 
   const handleNext = () => {
-    navigation.navigate('OtpFieldsScreen', { email });
+    if (email === '') {
+      return setEmailError('Email is required*');
+    } else if (!isValidEmail) {
+      return setEmailError('Please Enter Valid Email*');
+    } else {
+      navigation.navigate('OtpFieldsScreen', { email });
+    }
   };
+
+  const isDark = useSelector((state: RootState) => state.authAndTheme.theme);
+
+  useEffect(() => {
+    if (!isValidEmail && email !== '') {
+      return setEmailError('Please Enter Valid Email*');
+    } else if (isValidEmail) {
+      setEmailError('Good to go');
+    }
+  }, [email]);
 
   return (
     <SafeAreaView className="flex-1 gap- bg-white dark:bg-black px-2 justify-center relative pb-20">
-      <StatusBar
-        barStyle={colorScheme === 'dark' ? 'light-content' : 'dark-content'}
-      />
       <Pressable
         className=" absolute active:bg-white/20 p-2 rounded-full bg-black top-6 left-2"
         onPress={() => navigation.goBack()}
@@ -56,10 +79,14 @@ export default function EmailInputScreen() {
 
       <View className="flex-row items-center justify-center gap-4 pb-16">
         <View className="pt-2 ">
-          <UserCircleIcon weight="light" color="white" size={34} />
+          <KeyIcon
+            weight="light"
+            color={isDark ? 'white' : 'black'}
+            size={34}
+          />
         </View>
         <Text className="text-3xl font-exo2SemiBold text-gray-600 dark:text-gray-300">
-          Login to continue
+          Signin with Email
         </Text>
       </View>
 
@@ -75,17 +102,29 @@ export default function EmailInputScreen() {
           onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
+          className="w-full px-4 text-xl py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 text-black dark:text-white"
         />
+        <View className="justify-start flex-row items-end">
+          <Text
+            className={`text-md ${
+              emailError !== '' ? 'block' : 'hidden'
+            }  font-semibold  text-xl pt-2 ${
+              isValidEmail ? 'text-green-500' : 'text-red-600'
+            }`}
+          >
+            {emailError}
+          </Text>
+          {isValidEmail && <CheckIcon weight="bold" color="green" size={28} />}
+        </View>
       </View>
 
       {/* Get OTP Button */}
       <Ripple
+        onPress={handleNext}
         rippleColor="#000"
         rippleOpacity={0.3}
         rippleContainerBorderRadius={16}
-        onPress={() => handleNext()}
-        className="w-full flex-row items-center justify-center gap-4 py-3 bg-darkButton rounded-xl px-4 shadow-md active:opacity-80"
+        className="w-full flex-row items-center justify-center gap-4 py-3 bg-darkButton rounded-xl px-4"
       >
         <Text className="text-center text-white text-lg  font-exo2SemiBold tracking-wider">
           Get OTP
