@@ -97,7 +97,7 @@ export default function EmailInputScreen() {
         </Text>
         <TextInput
           placeholder="you@example.com"
-          placeholderTextColor="#9ca3af"
+            placeholderTextColor={colorScheme === 'dark' ? '#777' : '#ccc'}
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"

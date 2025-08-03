@@ -96,10 +96,10 @@ const LoginScreen = () => {
 
           <Ripple
             onPress={() => navigation.navigate('EmailInputScreen')}
-            rippleColor="#000"
+            rippleColor="#fff"
             rippleOpacity={0.3}
             rippleContainerBorderRadius={16}
-            className="flex-row items-center justify-center bg-darkButton gap-4 px-6 py-3 rounded-xl"
+            className="flex-row items-center justify-center bg- gap-4 px-6 py-3 rounded-xl"
           >
             <Image
               source={require('../../assets/images/email.png')}
